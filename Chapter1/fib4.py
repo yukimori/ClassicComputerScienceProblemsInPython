@@ -18,6 +18,9 @@ from functools import lru_cache
 
 @lru_cache(maxsize=None)
 def fib4(n: int) -> int:  # same definition as fib2()
+    """自動メモ化。新たな引数値で実行される度にデコレータが戻り値をキャッシュ
+    同じ引数値で呼び出されるとキャッシュから値を返される
+    """
     if n < 2:  # base case
         return n
     return fib4(n - 2) + fib4(n - 1)  # recursive case

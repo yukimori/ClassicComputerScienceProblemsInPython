@@ -16,12 +16,19 @@
 
 
 def calculate_pi(n_terms: int) -> float:
+    """円周率をライプニッツの公式を使って計算する
+    ライブニッツの公式 pi = 4/1 - 4/3 + 4/5 - 4/7 + 4/9 -
+    これは例でもっと効率的なコードで実装できる
+    """
+    # 公式では全ての項で分子は4
     numerator: float = 4.0
     denominator: float = 1.0
     operation: float = 1.0
     pi: float = 0.0
     for _ in range(n_terms):
         pi += operation * (numerator / denominator)
+        # 分母が2ずつ増えている
+        # 加減算は交互
         denominator += 2.0
         operation *= -1.0
     return pi

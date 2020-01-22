@@ -16,6 +16,8 @@
 
 
 def fib2(n: int) -> int:
+    """無限ループ回避。無駄な計算が多い
+    """
     if n < 2:  # base case
         return n
     return fib2(n - 2) + fib2(n - 1)  # recursive case

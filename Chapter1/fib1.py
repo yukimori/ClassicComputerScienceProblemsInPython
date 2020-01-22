@@ -16,6 +16,8 @@
 
 
 def fib1(n: int) -> int:
+    """エラーとなる
+    """
     return fib1(n - 1) + fib1(n - 2)
 
 

@@ -17,6 +17,8 @@ from typing import Generator
 
 
 def fib6(n: int) -> Generator[int, None, None]:
+    """フィボナッチ数列をジェネレータを作成する
+    イテレーションごとにフィボナッチ数列の値を取り出すことができる"""
     yield 0  # special case
     if n > 0: yield 1  # special case
     last: int = 0  # initially set to fib(0)
@@ -26,6 +28,22 @@ def fib6(n: int) -> Generator[int, None, None]:
         yield next  # main generation step
 
 
+def classic_fib6(n):
+    """これでも動作する
+    """
+    yield 0
+    if n > 0:
+        yield 1
+    last = 0
+    next = 1
+    for _ in range(1, n):
+        last, next = next, last + next
+        yield next
+
+
 if __name__ == "__main__":
     for i in fib6(50):
+        print(i)
+    
+    for i in classic_fib6(10):
         print(i)
