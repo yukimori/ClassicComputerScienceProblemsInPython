@@ -16,7 +16,8 @@
 from typing import TypeVar, Generic, List
 T = TypeVar('T')
 
-
+# Generic: いわゆるGeneric classを実現
+# Stack[int]のように使える
 class Stack(Generic[T]):
 
     def __init__(self) -> None:
@@ -42,10 +43,15 @@ for i in range(1, num_discs + 1):
 
 def hanoi(begin: Stack[int], end: Stack[int], temp: Stack[int], n: int) -> None:
     if n == 1:
+        # 基底部
         end.push(begin.pop())
     else:
+        # 再帰部
+        # 上のn-1枚をtower_aからtower_bに移動．tower_cを中間として利用
         hanoi(begin, temp, end, n - 1)
+        # 底の1枚をtower_aからtower_cに移動（基底部の処理）
         hanoi(begin, end, temp, 1)
+        # n-1をtower_bからtower_cに移動．tower_aを中間として利用
         hanoi(temp, end, begin, n - 1)
 
 

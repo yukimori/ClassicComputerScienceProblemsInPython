@@ -13,6 +13,9 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+
+# このソースコードをインポートすれば型をいちいちimportしなくてよい
+# 基本的な探索アルゴリズムはこのソースコードを再利用すればいい
 from __future__ import annotations
 from typing import TypeVar, Iterable, Sequence, Generic, List, Callable, Set, Deque, Dict, Any, Optional
 from typing_extensions import Protocol

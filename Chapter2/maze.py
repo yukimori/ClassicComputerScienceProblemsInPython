@@ -29,19 +29,35 @@ class Cell(str, Enum):
 
 
 class MazeLocation(NamedTuple):
+    """格子（リストのリスト）を保持する
+    座標を保持する
+    """
     row: int
     column: int
 
 
 class Maze:
     def __init__(self, rows: int = 10, columns: int = 10, sparseness: float = 0.2, start: MazeLocation = MazeLocation(0, 0), goal: MazeLocation = MazeLocation(9, 9)) -> None:
+        """[summary]
+        
+        Keyword Arguments:
+            rows {int} -- [description] (default: {10})
+            columns {int} -- [description] (default: {10})
+            sparseness {float} -- 障害物の割合 (default: {0.2})
+            start {MazeLocation} -- [description] (default: {MazeLocation(0, 0)})
+            goal {MazeLocation} -- [description] (default: {MazeLocation(9, 9)})
+        """
         # initialize basic instance variables
         self._rows: int = rows
         self._columns: int = columns
+        # スタートとゴールの座標を保持する
+        
         self.start: MazeLocation = start
         self.goal: MazeLocation = goal
         # fill the grid with empty cells
+        # 2次元リストをCell.EMPTYで埋める
         self._grid: List[List[Cell]] = [[Cell.EMPTY for c in range(columns)] for r in range(rows)]
+        print("_grid:", self._grid)
         # populate the grid with blocked cells
         self._randomly_fill(rows, columns, sparseness)
         # fill the start and goal locations in

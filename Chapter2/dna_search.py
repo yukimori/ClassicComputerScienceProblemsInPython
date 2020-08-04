@@ -16,14 +16,30 @@
 from enum import IntEnum
 from typing import Tuple, List
 
+"""
+探索問題
+ここでは遺伝子から指定されたコドンを見つける
+
+遺伝子は複数のコドンからなる。
+コドンは３つのヌクレオチドからなる。
+ヌクレオチドはA,C,G,Tの文字で表す。
+"""
+
+# IntEnumクラスはint型と比較できる。比較演算子<, >=などが使える
+# IntEnumクラスはEnumクラスとintのサブクラスになっている
+# ヌクレオチドをIntEnumで表現する
 Nucleotide: IntEnum = IntEnum('Nucleotide', ('A', 'C', 'G', 'T'))
 Codon = Tuple[Nucleotide, Nucleotide, Nucleotide]  # type alias for codons
 Gene = List[Codon]  # type alias for genes
+print("Nucleotide.A == 1:", Nucleotide.A == 1)
 
 gene_str: str = "ACGTGGCTCTCTAACGTACGTACGTACGGGGTTTATATATACCCTAGGACTCCCTTT"
 
 
 def string_to_gene(s: str) -> Gene:
+    """与えらえた遺伝子文字列情報を調べて3文字ごとにコドンに変換する。
+    最後が1,2文字でコドンに変換できないときはスキップする
+    """
     gene: Gene = []
     for i in range(0, len(s), 3):
         if (i + 2) >= len(s):  # don't run off end!
@@ -55,6 +71,7 @@ def binary_contains(gene: Gene, key_codon: Codon) -> bool:
     high: int = len(gene) - 1
     while low <= high:  # while there is still a search space
         mid: int = (low + high) // 2
+        # 文字列の比較
         if gene[mid] < key_codon:
             low = mid + 1
         elif gene[mid] > key_codon:
@@ -65,5 +82,6 @@ def binary_contains(gene: Gene, key_codon: Codon) -> bool:
 
 
 my_sorted_gene: Gene = sorted(my_gene)
+print("my_sorted_gene: ", my_sorted_gene)
 print(binary_contains(my_sorted_gene, acg))  # True
 print(binary_contains(my_sorted_gene, gat))  # False
